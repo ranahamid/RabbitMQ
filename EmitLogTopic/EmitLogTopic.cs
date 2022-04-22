@@ -3,7 +3,6 @@
 using RabbitMQ.Client;
 using System.Text;
 
-Console.WriteLine("Hello, World!");
 //var qName = "My_Tasks";
 var exchangeName = "topic_logs";
 
