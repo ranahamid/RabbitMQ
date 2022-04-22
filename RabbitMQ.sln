@@ -21,7 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReceiveLogsDirect", "Receiv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmitLogTopic", "EmitLogTopic\EmitLogTopic.csproj", "{1E961852-7237-4805-B219-5219275C305D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveLogsTopic", "ReceiveLogsTopic\ReceiveLogsTopic.csproj", "{9D62F105-EC61-4FB0-BBCC-57333CF40867}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReceiveLogsTopic", "ReceiveLogsTopic\ReceiveLogsTopic.csproj", "{9D62F105-EC61-4FB0-BBCC-57333CF40867}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RPCServer", "RPCServer\RPCServer.csproj", "{C14A06BF-A3E8-40DC-A6B3-0C6A6F50D581}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcClient", "RpcClient\RpcClient.csproj", "{6AE3A753-2A88-4A9C-BD23-A84445761857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{9D62F105-EC61-4FB0-BBCC-57333CF40867}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D62F105-EC61-4FB0-BBCC-57333CF40867}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D62F105-EC61-4FB0-BBCC-57333CF40867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14A06BF-A3E8-40DC-A6B3-0C6A6F50D581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14A06BF-A3E8-40DC-A6B3-0C6A6F50D581}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14A06BF-A3E8-40DC-A6B3-0C6A6F50D581}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14A06BF-A3E8-40DC-A6B3-0C6A6F50D581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE3A753-2A88-4A9C-BD23-A84445761857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE3A753-2A88-4A9C-BD23-A84445761857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE3A753-2A88-4A9C-BD23-A84445761857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE3A753-2A88-4A9C-BD23-A84445761857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
