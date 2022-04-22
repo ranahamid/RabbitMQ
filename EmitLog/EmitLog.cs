@@ -10,7 +10,7 @@ var factory = new ConnectionFactory() { HostName = "localhost" };
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-channel.ExchangeDeclare(exchangeName, ExchangeType.Fanout);
+channel.ExchangeDeclare( exchange: exchangeName,type: ExchangeType.Fanout);
 
 
 //channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
@@ -21,7 +21,8 @@ list[1] = "HLatest RHHH changes ello kk.00.";
 list[2] = "HLatest RHHH changes ello oo..";
 list[3] = "HLatest RHHH changes ello TT..";
 list[4] = "HLatest RHHH changes ello PP..";
-string message = GetMessage(list);
+//string message = GetMessage(list);
+string message = GetMessage(args);
 var body = Encoding.UTF8.GetBytes(message);
 
 //var properties = channel.CreateBasicProperties();

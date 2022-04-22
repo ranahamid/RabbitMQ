@@ -17,6 +17,7 @@ list[2] = "Hello oo..";
 list[3] = "Hello TT..";
 list[4] = "Hello PP..";
 string message = GetMessage(list);
+
 var body = Encoding.UTF8.GetBytes(message);
 
 var properties= channel.CreateBasicProperties();
