@@ -4,9 +4,7 @@ using System.Text;
 
 Console.WriteLine("Hello, World!");
 //var qName = "My_Tasks";
-var exchangeName = "direct_logs";
- 
-
+var exchangeName = "logs";
 var factory = new ConnectionFactory()
 {
     HostName = "localhost",
@@ -15,22 +13,10 @@ var factory = new ConnectionFactory()
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Direct);
+channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Fanout);
 
 var queueName = channel.QueueDeclare(queue: "").QueueName;
-if (args.Length < 1)
-{
-    Console.Error.WriteLine($"Usage: {Environment.GetCommandLineArgs()[0]} [info] [warning] [error]");
-    Console.WriteLine("Press [enter] to exit.");
-    Console.ReadLine();
-    Environment.ExitCode = 1;
-    return;
-}
-foreach (var severity in args)
-{
-    channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: severity);
-}
-
+channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: "");
 
 //channel.QueueDeclare
 //    (
@@ -52,12 +38,11 @@ consumer.Received += (model, ea) =>
 {
     var body = ea.Body.ToArray();
     var message = Encoding.UTF8.GetString(body);
-    var routingKey= ea.RoutingKey;
-    Console.WriteLine($"[X] Received: {message}, routingKey: {routingKey}");
+    Console.WriteLine($"[X] Received: {message}");
 
-    //int dots = message.Split('.').Length - 1;
-    //Thread.Sleep(dots * 1000);
-    //Console.WriteLine("[X] done");
+    int dots = message.Split('.').Length - 1;
+    Thread.Sleep(dots * 1000);
+    Console.WriteLine("[X] done");
 
     //channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 };

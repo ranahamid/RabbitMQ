@@ -11,9 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewTask", "NewTask\NewTask.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Worker", "Worker\Worker.csproj", "{97F4E763-D05A-459A-8EF3-50687C53989A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitLog", "EmitLog\EmitLog.csproj", "{C43D9E9D-AF4A-437B-B241-5FEF3C42AA9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmitLog", "EmitLog\EmitLog.csproj", "{C43D9E9D-AF4A-437B-B241-5FEF3C42AA9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveLogs", "ReceiveLogs\ReceiveLogs.csproj", "{7D29311E-2B80-41A9-87E6-4EB29287BC62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReceiveLogs", "ReceiveLogs\ReceiveLogs.csproj", "{7D29311E-2B80-41A9-87E6-4EB29287BC62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmitLogDirect", "EmitLogDirect\EmitLogDirect.csproj", "{D104FEB2-FD04-45CF-AEC2-18649F634D64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReceiveLogsDirect", "ReceiveLogsDirect\ReceiveLogsDirect.csproj", "{BA63EE74-DFEA-473B-B629-97B55287D4AC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +49,14 @@ Global
 		{7D29311E-2B80-41A9-87E6-4EB29287BC62}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D29311E-2B80-41A9-87E6-4EB29287BC62}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D29311E-2B80-41A9-87E6-4EB29287BC62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D104FEB2-FD04-45CF-AEC2-18649F634D64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D104FEB2-FD04-45CF-AEC2-18649F634D64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D104FEB2-FD04-45CF-AEC2-18649F634D64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D104FEB2-FD04-45CF-AEC2-18649F634D64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA63EE74-DFEA-473B-B629-97B55287D4AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA63EE74-DFEA-473B-B629-97B55287D4AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA63EE74-DFEA-473B-B629-97B55287D4AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA63EE74-DFEA-473B-B629-97B55287D4AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
