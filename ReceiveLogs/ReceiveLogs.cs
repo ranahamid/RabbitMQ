@@ -13,9 +13,9 @@ var factory = new ConnectionFactory()
 using var connection = factory.CreateConnection();
 using var channel = connection.CreateModel();
 
-channel.ExchangeDeclare(exchangeName, ExchangeType.Fanout);
+channel.ExchangeDeclare(exchange: exchangeName, type: ExchangeType.Fanout);
 
-var queueName = channel.QueueDeclare().QueueName;
+var queueName = channel.QueueDeclare(queue: "").QueueName;
 channel.QueueBind(queue: queueName, exchange: exchangeName, routingKey: "");
 
 //channel.QueueDeclare
@@ -44,7 +44,7 @@ consumer.Received += (model, ea) =>
     Thread.Sleep(dots * 1000);
     Console.WriteLine("[X] done");
 
-    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+    //channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
 };
 
 channel.BasicConsume(
