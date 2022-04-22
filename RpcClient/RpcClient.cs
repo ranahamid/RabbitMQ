@@ -1,9 +1,8 @@
-﻿//dotnet run "kern.*" "*.critical"
-
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+﻿using System;
 using System.Collections.Concurrent;
 using System.Text;
+using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
 public class RpcClient
 {
@@ -13,59 +12,47 @@ public class RpcClient
     private readonly EventingBasicConsumer consumer;
     private readonly BlockingCollection<string> respQueue = new BlockingCollection<string>();
     private readonly IBasicProperties props;
-    public string  queueName = "rpc_queue";
+
     public RpcClient()
     {
-       
+        var factory = new ConnectionFactory() { HostName = "localhost" };
 
-        var factory = new ConnectionFactory()
-        {
-            HostName = "localhost",
-        };
-        var exchangeName = "topic_logs";
+        connection = factory.CreateConnection();
+        channel = connection.CreateModel();
+        replyQueueName = channel.QueueDeclare().QueueName;
+        consumer = new EventingBasicConsumer(channel);
 
-        using var connection = factory.CreateConnection();
-        using var channel = connection.CreateModel();
+        props = channel.CreateBasicProperties();
+        var correlationId = Guid.NewGuid().ToString();
+        props.CorrelationId = correlationId;
+        props.ReplyTo = replyQueueName;
 
-        var replyQueueName = channel.QueueDeclare(queue: "").QueueName; 
-
-        var consumer = new EventingBasicConsumer(channel);
-
-        var props = channel.CreateBasicProperties();      
-   var correlationId=Guid.NewGuid().ToString();
-        props.CorrelationId =
-  props.ReplyTo = replyQueueName;
-
-        
-       
-         
         consumer.Received += (model, ea) =>
         {
             var body = ea.Body.ToArray();
-            var message = Encoding.UTF8.GetString(body);
-            if(ea.BasicProperties.CorrelationId== correlationId)
+            var response = Encoding.UTF8.GetString(body);
+            if (ea.BasicProperties.CorrelationId == correlationId)
             {
-                respQueue.Add(message);
+                respQueue.Add(response);
             }
-            Console.WriteLine($"[X] Received: {message}, routing key:{ea.RoutingKey}");
         };
 
-        channel.BasicConsume(queue: replyQueueName, autoAck: true, consumer: consumer);
-
-        Console.WriteLine(" Press [enter] to exit.");
-        Console.ReadLine();
+        channel.BasicConsume(
+            consumer: consumer,
+            queue: replyQueueName,
+            autoAck: true);
     }
 
     public string Call(string message)
     {
-        var resBytes = Encoding.UTF8.GetBytes(message);
+        var messageBytes = Encoding.UTF8.GetBytes(message);
         channel.BasicPublish(
             exchange: "",
-            routingKey: queueName,
+            routingKey: "rpc_queue01",
             basicProperties: props,
-            body: resBytes
-            );
-     return respQueue.Take();
+            body: messageBytes);
+
+        return respQueue.Take();
     }
 
     public void Close()
@@ -73,15 +60,17 @@ public class RpcClient
         connection.Close();
     }
 }
+
 public class Rpc
 {
     public static void Main()
     {
         var rpcClient = new RpcClient();
+
+        Console.WriteLine(" [x] Requesting fib(25)");
         var response = rpcClient.Call("30");
-        Console.WriteLine($"[.] Got {response}");
+
+        Console.WriteLine(" [.] Got '{0}'", response);
         rpcClient.Close();
     }
 }
-
- 

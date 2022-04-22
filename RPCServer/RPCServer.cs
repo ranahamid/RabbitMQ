@@ -7,16 +7,15 @@ class RPCServer
 {
     public static void Main()
     {
-        var queueName = "rpc_queue";
         var factory = new ConnectionFactory() { HostName = "localhost" };
         using (var connection = factory.CreateConnection())
         using (var channel = connection.CreateModel())
         {
-            channel.QueueDeclare(queue: queueName, durable: false,
+            channel.QueueDeclare(queue: "rpc_queue01", durable: false,
               exclusive: false, autoDelete: false, arguments: null);
             channel.BasicQos(0, 1, false);
             var consumer = new EventingBasicConsumer(channel);
-            channel.BasicConsume(queue: queueName,
+            channel.BasicConsume(queue: "rpc_queue01",
               autoAck: false, consumer: consumer);
             Console.WriteLine(" [x] Awaiting RPC requests");
 
@@ -46,7 +45,6 @@ class RPCServer
                     var responseBytes = Encoding.UTF8.GetBytes(response);
                     channel.BasicPublish(exchange: "", routingKey: props.ReplyTo,
                       basicProperties: replyProps, body: responseBytes);
-
                     channel.BasicAck(deliveryTag: ea.DeliveryTag,
                       multiple: false);
                 }
